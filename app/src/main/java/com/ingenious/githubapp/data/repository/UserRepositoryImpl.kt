@@ -1,6 +1,5 @@
 package com.ingenious.githubapp.data.repository
 
-import android.util.Log
 import com.ingenious.githubapp.data.mapper.UserDetailsDtoMapper
 import com.ingenious.githubapp.data.mapper.UserDetailsEntityMapper
 import com.ingenious.githubapp.data.mapper.UserEntityMapper
@@ -32,12 +31,10 @@ class UserRepositoryImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             val cachedUser = userDetailsDao.getUserDetails(login)
                 ?.let(userDetailsEntityMapper::from)
-                ?.also { Log.d("FURMK", "User from DB") }
 
             val userDetails = cachedUser
                 ?: githubService.getUser(login)
                     .let(userDetailsEntityMapper::from)
-                    .also { Log.d("FURMK", "User from REMOTE") }
                     .also { userDetailsDao.insert(userDetailsDtoMapper.from(it)) }
 
             success(userDetails)
