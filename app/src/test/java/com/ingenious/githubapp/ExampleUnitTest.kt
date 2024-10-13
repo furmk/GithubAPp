@@ -1,4 +1,4 @@
-package com.activecampaign.githubapp
+package com.ingenious.githubapp
 
 import org.junit.Test
 

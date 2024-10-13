@@ -1,4 +1,4 @@
-package com.activecampaign.githubapp.ui.theme
+package com.ingenious.githubapp.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

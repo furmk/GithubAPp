@@ -1,4 +1,4 @@
-package com.activecampaign.githubapp.ui.theme
+package com.ingenious.githubapp.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
