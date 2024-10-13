@@ -19,10 +19,10 @@ class UserDetailsViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<UserDetailsState>(UserDetailsState.Loading)
     val uiState = _uiState.asStateFlow()
 
-    fun getUserDetails(username: String) {
-        username.let {
+    fun getUserDetails(login: String) {
+        login.let {
             viewModelScope.launch {
-                getUserDetailsUseCase.run(username)
+                getUserDetailsUseCase.run(login)
                     .onSuccess { userDetails ->
                         _uiState.update {
                             UserDetailsState.Loaded(userDetails)

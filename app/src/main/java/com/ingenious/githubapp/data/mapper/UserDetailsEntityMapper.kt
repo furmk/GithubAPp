@@ -9,6 +9,7 @@ class UserDetailsEntityMapper @Inject constructor() {
 
     fun from(response: UserDetailsResponse): UserDetailsEntity = with(response) {
         UserDetailsEntity(
+            login = login,
             name = name.orEmpty(),
             email = email.orEmpty(),
             location = location.orEmpty(),
@@ -18,6 +19,7 @@ class UserDetailsEntityMapper @Inject constructor() {
 
     fun from(dto: UserDetailsDto): UserDetailsEntity = with(dto) {
         UserDetailsEntity(
+            login = login,
             name = name,
             email = email,
             location = location,

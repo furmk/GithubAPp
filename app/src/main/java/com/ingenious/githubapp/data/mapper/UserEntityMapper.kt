@@ -4,14 +4,15 @@ import com.ingenious.githubapp.data.model.persistance.UserDto
 import com.ingenious.githubapp.data.model.response.UserResponse
 import com.ingenious.githubapp.domain.model.UserEntity
 import javax.inject.Inject
+import kotlin.math.log
 
-class UserMapper @Inject constructor() {
+class UserEntityMapper @Inject constructor() {
 
     fun from(response: UserResponse): UserEntity = with(response) {
-        UserEntity(name = login)
+        UserEntity(login = login)
     }
 
     fun from(dto: UserDto) = with(dto) {
-        UserEntity(name = name)
+        UserEntity(login = login)
     }
 }

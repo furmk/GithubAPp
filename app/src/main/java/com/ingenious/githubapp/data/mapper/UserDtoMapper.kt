@@ -7,6 +7,6 @@ import javax.inject.Inject
 class UserDtoMapper @Inject constructor() {
 
     fun from(entity: UserEntity) = with(entity) {
-        UserDto(name = name)
+        UserDto(login = login)
     }
 }

@@ -13,9 +13,6 @@ interface UserDao {
     @Query("SELECT * FROM user")
     suspend fun getAll(): List<UserDto>
 
-    @Query("SELECT * FROM user WHERE name = :name")
-    fun getUserByName(name: String): UserDto
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(userDto: UserDto)
 

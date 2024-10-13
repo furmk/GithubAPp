@@ -9,5 +9,5 @@ sealed class Route {
     data object UserList : Route()
 
     @Serializable
-    data class UserDetail(val username: String) : Route()
+    data class UserDetail(val login: String) : Route()
 }

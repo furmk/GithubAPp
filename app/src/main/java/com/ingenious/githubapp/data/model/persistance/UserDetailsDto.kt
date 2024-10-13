@@ -6,7 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "userDetails")
 data class UserDetailsDto(
-    @PrimaryKey val name: String,
+    @PrimaryKey val login: String,
+    @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "location") val location: String,
     @ColumnInfo(name = "email") val email: String,
     @ColumnInfo(name = "avatarUrl") val avatarUrl: String,

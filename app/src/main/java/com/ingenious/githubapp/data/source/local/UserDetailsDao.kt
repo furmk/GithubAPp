@@ -9,8 +9,8 @@ import com.ingenious.githubapp.data.model.persistance.UserDetailsDto
 @Dao
 interface UserDetailsDao {
 
-    @Query("SELECT * FROM userDetails WHERE name = :name")
-    suspend fun getUserDetails(name: String): UserDetailsDto
+    @Query("SELECT * FROM userDetails WHERE login = :name")
+    suspend fun getUserDetails(name: String): UserDetailsDto?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(userDetailsDto: UserDetailsDto)

@@ -5,5 +5,5 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "user")
 data class UserDto(
-    @PrimaryKey val name: String,
+    @PrimaryKey val login: String,
 )

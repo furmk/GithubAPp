@@ -29,12 +29,12 @@ import com.ingenious.githubapp.presentation.model.UserDetailsState
 
 @Composable
 fun UserDetailsScreen(
-    username: String,
+    login: String,
     viewModel: UserDetailsViewModel
 ) {
 
     val state by viewModel.uiState.collectAsStateWithLifecycle()
-    viewModel.getUserDetails(username)
+    viewModel.getUserDetails(login)
 
     when (val currentState = state) {
         is UserDetailsState.Loaded -> UserDetailsContent(currentState.userDetails)
@@ -126,6 +126,7 @@ fun CircularImageWithLoading(url: String) {
 @Composable
 fun ShowUserDetailsPreview() {
     val userDetails = UserDetailsEntity(
+        login = "furmk",
         name = "Kacper",
         location = "Cracow",
         email = "furmk@exampl.com",

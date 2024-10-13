@@ -7,5 +7,5 @@ interface UserRepository {
 
     suspend fun getAllUsers(): Result<List<UserEntity>>
 
-    suspend fun getUserDetails(username: String) : Result<UserDetailsEntity>
+    suspend fun getUserDetails(login: String) : Result<UserDetailsEntity>
 }

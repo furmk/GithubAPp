@@ -42,16 +42,16 @@ class MainActivity : ComponentActivity() {
             ) {
                 composable<Route.UserList> {
                     UserListScreen(
-                        onUserClicked = { username ->
-                            navController.navigate(Route.UserDetail(username))
+                        onUserClicked = { login ->
+                            navController.navigate(Route.UserDetail(login))
                         },
                         viewModel = hiltViewModel(),
                     )
                 }
                 composable<Route.UserDetail> { backStackEntry ->
-                    val username = backStackEntry.arguments?.getString("username").orEmpty()
+                    val login = backStackEntry.arguments?.getString("login").orEmpty()
                     UserDetailsScreen(
-                        username = username,
+                        login = login,
                         viewModel = hiltViewModel()
                     )
                 }

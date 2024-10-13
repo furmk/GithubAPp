@@ -14,8 +14,8 @@ interface GithubService {
         @Query("per_page") perPage: Int = 50,
     ): List<UserResponse>
 
-    @GET("users/{username}")
+    @GET("users/{login}")
     suspend fun getUser(
-        @Path("username") username: String,
+        @Path("login") login: String,
     ): UserDetailsResponse
 }

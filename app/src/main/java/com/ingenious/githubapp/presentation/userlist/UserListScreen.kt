@@ -35,7 +35,7 @@ fun UserListScreen(
         items(state.usersList) { user ->
             UserListItem(
                 user = user,
-                onClick = { onUserClicked.invoke(user.name) }
+                onClick = { onUserClicked.invoke(user.login) }
             )
         }
     }
@@ -55,7 +55,7 @@ fun UserListItem(
     ) {
         Text(
             fontSize = 15.sp,
-            text = user.name
+            text = user.login
         )
     }
     HorizontalDivider(

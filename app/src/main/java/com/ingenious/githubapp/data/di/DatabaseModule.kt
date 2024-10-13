@@ -8,6 +8,7 @@ import com.ingenious.githubapp.data.source.local.UsersDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -17,7 +18,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(appContext: Context): UsersDatabase =
+    fun provideDatabase(@ApplicationContext appContext: Context): UsersDatabase =
         Room.databaseBuilder(
             context = appContext,
             klass = UsersDatabase::class.java,

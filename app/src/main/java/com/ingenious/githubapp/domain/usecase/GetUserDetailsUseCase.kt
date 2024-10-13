@@ -8,6 +8,6 @@ class GetUserDetailsUseCase @Inject constructor(
     private val userRepository: UserRepository,
 ) {
 
-    suspend fun run(username: String): Result<UserDetailsEntity> =
-        userRepository.getUserDetails(username)
+    suspend fun run(login: String): Result<UserDetailsEntity> =
+        userRepository.getUserDetails(login)
 }

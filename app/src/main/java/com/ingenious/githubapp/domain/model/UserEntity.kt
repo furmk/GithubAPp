@@ -1,5 +1,5 @@
 package com.ingenious.githubapp.domain.model
 
 data class UserEntity(
-    val name: String,
+    val login: String,
 )
