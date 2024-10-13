@@ -30,17 +30,16 @@ import com.ingenious.githubapp.presentation.model.UserDetailsState
 
 @Composable
 fun UserDetailsScreen(
-    login: String,
-    viewModel: UserDetailsViewModel
+    state: UserDetailsState,
+    loadUserDetails: () -> Unit,
 ) {
 
-    val state by viewModel.uiState.collectAsStateWithLifecycle()
-    LaunchedEffect(login) {
-        viewModel.getUserDetails(login)
+    LaunchedEffect(true) {
+        loadUserDetails()
     }
 
-    when (val currentState = state) {
-        is UserDetailsState.Loaded -> UserDetailsContent(currentState.userDetails)
+    when (state) {
+        is UserDetailsState.Loaded -> UserDetailsContent(state.userDetails)
         is UserDetailsState.Loading -> Progress()
     }
 }
@@ -135,6 +134,9 @@ fun ShowUserDetailsPreview() {
         email = "furmk@exampl.com",
         avatarUrl = "https://polskifm.com/wp-content/uploads/wisla-krakow-2.jpg"
     )
+    val state = UserDetailsState.Loaded(userDetails)
 
-    UserDetailsContent(userDetails = userDetails)
+    UserDetailsScreen(
+        state,
+    ) {}
 }

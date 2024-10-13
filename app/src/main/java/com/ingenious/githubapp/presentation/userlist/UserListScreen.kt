@@ -11,21 +11,19 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.ingenious.githubapp.domain.model.UserEntity
+import com.ingenious.githubapp.presentation.model.UserListState
 
 @Composable
 fun UserListScreen(
+    state: UserListState,
     onUserClicked: (String) -> Unit,
-    viewModel: UserListViewModel,
 ) {
-    val state by viewModel.uiState.collectAsStateWithLifecycle()
     val listState = rememberLazyListState()
 
     LazyColumn(

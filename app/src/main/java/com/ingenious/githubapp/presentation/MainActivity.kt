@@ -1,21 +1,25 @@
 package com.ingenious.githubapp.presentation
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.ingenious.githubapp.presentation.navigation.Route
 import com.ingenious.githubapp.presentation.ui.theme.GithubAppTheme
 import com.ingenious.githubapp.presentation.userdetails.UserDetailsScreen
+import com.ingenious.githubapp.presentation.userdetails.UserDetailsViewModel
 import com.ingenious.githubapp.presentation.userlist.UserListScreen
+import com.ingenious.githubapp.presentation.userlist.UserListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,7 +36,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
     private fun AppNavHost(navController: NavHostController) {
         Scaffold {
@@ -41,18 +44,24 @@ class MainActivity : ComponentActivity() {
                 startDestination = Route.UserList,
             ) {
                 composable<Route.UserList> {
+                    val viewmodel = hiltViewModel<UserListViewModel>()
+                    val state by viewmodel.uiState.collectAsStateWithLifecycle()
+
                     UserListScreen(
+                        state = state,
                         onUserClicked = { login ->
                             navController.navigate(Route.UserDetail(login))
                         },
-                        viewModel = hiltViewModel(),
                     )
                 }
                 composable<Route.UserDetail> { backStackEntry ->
-                    val login = backStackEntry.arguments?.getString("login").orEmpty()
+                    val route = backStackEntry.toRoute<Route.UserDetail>()
+                    val viewModel = hiltViewModel<UserDetailsViewModel>()
+                    val state by viewModel.uiState.collectAsStateWithLifecycle()
+
                     UserDetailsScreen(
-                        login = login,
-                        viewModel = hiltViewModel()
+                        state = state,
+                        loadUserDetails = { viewModel.getUserDetails(route.login) }
                     )
                 }
             }
