@@ -22,6 +22,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildConfigField("String", "TOKEN", "\"${System.getenv("GITHUB_TOKEN") ?: "YOUR TOKEN"}\"")
     }
 
     buildTypes {
@@ -43,6 +44,7 @@ android {
     buildFeatures {
         viewBinding = true
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"

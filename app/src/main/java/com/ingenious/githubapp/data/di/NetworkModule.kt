@@ -1,5 +1,6 @@
 package com.ingenious.githubapp.data.di
 
+import com.ingenious.githubapp.BuildConfig
 import com.ingenious.githubapp.data.source.remote.ApiTokenInterceptor
 import com.ingenious.githubapp.data.source.remote.GithubService
 import com.squareup.moshi.Moshi
@@ -31,9 +32,8 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
-        val token = "YOUR TOKEN"
         return OkHttpClient.Builder()
-            .addInterceptor(ApiTokenInterceptor(token))
+            .addInterceptor(ApiTokenInterceptor(BuildConfig.TOKEN))
             .addInterceptor(HttpLoggingInterceptor().apply { setLevel(HttpLoggingInterceptor.Level.BODY) })
             .build()
     }
