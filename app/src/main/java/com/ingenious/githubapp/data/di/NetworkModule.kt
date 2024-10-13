@@ -1,7 +1,7 @@
 package com.ingenious.githubapp.data.di
 
-import com.ingenious.githubapp.data.service.ApiTokenInterceptor
-import com.ingenious.githubapp.data.service.GithubService
+import com.ingenious.githubapp.data.source.remote.ApiTokenInterceptor
+import com.ingenious.githubapp.data.source.remote.GithubService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module

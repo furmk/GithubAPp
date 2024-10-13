@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImagePainter
 import coil3.compose.rememberAsyncImagePainter
-import com.ingenious.githubapp.domain.model.GithubUserDetails
+import com.ingenious.githubapp.domain.model.UserDetailsEntity
 import com.ingenious.githubapp.presentation.model.UserDetailsState
 
 @Composable
@@ -57,7 +57,7 @@ fun Progress() {
 }
 
 @Composable
-fun UserDetailsContent(userDetails: GithubUserDetails) {
+fun UserDetailsContent(userDetails: UserDetailsEntity) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -125,7 +125,7 @@ fun CircularImageWithLoading(url: String) {
 @Preview(showBackground = true)
 @Composable
 fun ShowUserDetailsPreview() {
-    val userDetails = GithubUserDetails(
+    val userDetails = UserDetailsEntity(
         name = "Kacper",
         location = "Cracow",
         email = "furmk@exampl.com",

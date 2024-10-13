@@ -1,7 +1,7 @@
-package com.ingenious.githubapp.data.service
+package com.ingenious.githubapp.data.source.remote
 
-import com.ingenious.githubapp.data.model.UserDetailsResponse
-import com.ingenious.githubapp.data.model.UserResponse
+import com.ingenious.githubapp.data.model.response.UserDetailsResponse
+import com.ingenious.githubapp.data.model.response.UserResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

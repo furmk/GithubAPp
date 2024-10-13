@@ -1,7 +1,7 @@
 package com.ingenious.githubapp.presentation.model
 
-import com.ingenious.githubapp.domain.model.GithubUser
+import com.ingenious.githubapp.domain.model.UserEntity
 
 data class UserListState(
-    val usersList: List<GithubUser> = emptyList()
+    val usersList: List<UserEntity> = emptyList()
 )

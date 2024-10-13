@@ -1,4 +1,4 @@
-package com.ingenious.githubapp.data.service
+package com.ingenious.githubapp.data.source.remote
 
 import okhttp3.Interceptor
 import okhttp3.Response

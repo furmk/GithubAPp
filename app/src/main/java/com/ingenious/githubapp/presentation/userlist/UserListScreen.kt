@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.ingenious.githubapp.domain.model.GithubUser
+import com.ingenious.githubapp.domain.model.UserEntity
 
 @Composable
 fun UserListScreen(
@@ -35,7 +35,7 @@ fun UserListScreen(
         items(state.usersList) { user ->
             UserListItem(
                 user = user,
-                onClick = { onUserClicked.invoke(user.login) }
+                onClick = { onUserClicked.invoke(user.name) }
             )
         }
     }
@@ -43,7 +43,7 @@ fun UserListScreen(
 
 @Composable
 fun UserListItem(
-    user: GithubUser,
+    user: UserEntity,
     onClick: () -> Unit
 ) {
     Row(
@@ -55,7 +55,7 @@ fun UserListItem(
     ) {
         Text(
             fontSize = 15.sp,
-            text = user.login
+            text = user.name
         )
     }
     HorizontalDivider(
