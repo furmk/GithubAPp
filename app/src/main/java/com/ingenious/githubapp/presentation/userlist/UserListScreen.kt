@@ -6,16 +6,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
@@ -38,11 +35,7 @@ fun UserListScreen(
 ) {
     val listState = rememberLazyListState()
 
-    if (items.itemCount == 0) {
-        EmptyContent(reloadItems)
-    } else {
-        UsersContent(listState, items, onUserClicked, reloadItems)
-    }
+    UsersContent(listState, items, onUserClicked, reloadItems)
 }
 
 @Composable
@@ -67,6 +60,7 @@ private fun UsersContent(
             pagedItems.loadState.refresh is LoadState.Loading -> {
                 item { CircularProgressIndicator() }
             }
+
             pagedItems.loadState.append is LoadState.Loading -> {
                 item { CircularProgressIndicator() }
             }
@@ -111,45 +105,6 @@ fun ErrorContent(
                 onRetry.invoke()
             }) {
                 Text(text = "Retry", color = Color.White)
-            }
-        }
-    }
-}
-
-@Composable
-private fun EmptyContent(
-    reloadItems: () -> Unit,
-) {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.LightGray)
-            .padding(16.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = "An unexpected error has occurred, or no users could be retrieved.",
-                color = Color.Black,
-                fontSize = 20.sp,
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White
-                ),
-                onClick = { reloadItems.invoke() },
-            ) {
-                Text(
-                    color = Color.Black,
-                    text = "Reload users"
-                )
             }
         }
     }
