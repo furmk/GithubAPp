@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.ingenious.githubapp.presentation.navigation.Route
 import com.ingenious.githubapp.presentation.ui.theme.GithubAppTheme
 import com.ingenious.githubapp.presentation.userdetails.UserDetailsScreen
@@ -47,10 +48,10 @@ class MainActivity : ComponentActivity() {
             ) {
                 composable<Route.UserList> {
                     val viewmodel = hiltViewModel<UserListViewModel>()
-                    val state = viewmodel.uiState
+                    val items = viewmodel.uiState.collectAsLazyPagingItems()
 
                     UserListScreen(
-                        state = state,
+                        items = items,
                         onUserClicked = { login ->
                             navController.navigate(Route.UserDetail(login))
                         },

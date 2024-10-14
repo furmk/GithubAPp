@@ -27,25 +27,21 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
 import com.ingenious.githubapp.domain.model.UserEntity
-import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun UserListScreen(
-    state: StateFlow<PagingData<UserEntity>>,
+    items: LazyPagingItems<UserEntity>,
     reloadItems: () -> Unit,
     onUserClicked: (String) -> Unit,
 ) {
     val listState = rememberLazyListState()
-    val pagedItems = state.collectAsLazyPagingItems()
 
-    if (pagedItems.itemCount == 0) {
+    if (items.itemCount == 0) {
         EmptyContent(reloadItems)
     } else {
-        UsersContent(listState, pagedItems, onUserClicked, reloadItems)
+        UsersContent(listState, items, onUserClicked, reloadItems)
     }
 }
 
