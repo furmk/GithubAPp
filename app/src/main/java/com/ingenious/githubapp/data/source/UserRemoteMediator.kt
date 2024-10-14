@@ -29,9 +29,10 @@ class UserRemoteMediator @Inject constructor(
                 LoadType.REFRESH -> 1
                 LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
                 LoadType.APPEND -> {
-                    val lastItem = state.lastItemOrNull()
+                    val lastItemId = userDao.getLastUserId()
                         ?: return MediatorResult.Success(endOfPaginationReached = true)
-                    lastItem.id
+
+                    lastItemId
                 }
             }
 

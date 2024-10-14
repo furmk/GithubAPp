@@ -14,6 +14,9 @@ interface UserDao {
     @Query("SELECT * FROM user")
     fun getAll(): PagingSource<Int, UserDto>
 
+    @Query("SELECT id FROM user WHERE id = (SELECT MAX(id) FROM user)")
+    suspend fun getLastUserId(): Int?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(userDto: UserDto)
 
