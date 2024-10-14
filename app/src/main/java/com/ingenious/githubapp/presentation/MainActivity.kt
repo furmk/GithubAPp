@@ -54,6 +54,7 @@ class MainActivity : ComponentActivity() {
                         onUserClicked = { login ->
                             navController.navigate(Route.UserDetail(login))
                         },
+                        reloadItems = viewmodel::reloadUsers,
                     )
                 }
                 composable<Route.UserDetail> { backStackEntry ->

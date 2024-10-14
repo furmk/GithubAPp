@@ -23,6 +23,14 @@ class UserListViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     init {
+        loadUsers()
+    }
+
+    fun reloadUsers() {
+        loadUsers()
+    }
+
+    private fun loadUsers() {
         viewModelScope.launch {
             getAllUsersUseCase.run()
                 .distinctUntilChanged()

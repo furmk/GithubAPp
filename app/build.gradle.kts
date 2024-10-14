@@ -73,7 +73,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.moshi)
     implementation(libs.okhttp)
-    implementation(libs.logging.interceptor) // For the logging interceptor
+    implementation(libs.logging.interceptor)
     implementation(libs.moshi)
     implementation(libs.moshi.kotlin)
 
