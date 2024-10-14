@@ -26,10 +26,6 @@ class UserListViewModel @Inject constructor(
         loadUsers()
     }
 
-    fun reloadUsers() {
-        loadUsers()
-    }
-
     private fun loadUsers() {
         viewModelScope.launch {
             getAllUsersUseCase.run()
