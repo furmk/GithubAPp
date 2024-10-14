@@ -4,6 +4,7 @@ import com.ingenious.githubapp.data.repository.UserRepositoryImpl
 import com.ingenious.githubapp.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 

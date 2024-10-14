@@ -1,5 +1,6 @@
 package com.ingenious.githubapp.data.source.local
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -11,10 +12,13 @@ import com.ingenious.githubapp.data.model.persistance.UserDto
 interface UserDao {
 
     @Query("SELECT * FROM user")
-    suspend fun getAll(): List<UserDto>
+    fun getAll(): PagingSource<Int, UserDto>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(userDto: UserDto)
+    suspend fun insert(userDto: UserDto)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(vararg users: UserDto)
 
     @Delete
     suspend fun delete(userDto: UserDto)

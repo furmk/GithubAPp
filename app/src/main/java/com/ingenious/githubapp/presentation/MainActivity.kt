@@ -1,5 +1,6 @@
 package com.ingenious.githubapp.presentation
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -36,6 +37,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @Composable
     private fun AppNavHost(navController: NavHostController) {
         Scaffold {
@@ -45,7 +47,7 @@ class MainActivity : ComponentActivity() {
             ) {
                 composable<Route.UserList> {
                     val viewmodel = hiltViewModel<UserListViewModel>()
-                    val state by viewmodel.uiState.collectAsStateWithLifecycle()
+                    val state = viewmodel.uiState
 
                     UserListScreen(
                         state = state,
@@ -61,6 +63,7 @@ class MainActivity : ComponentActivity() {
 
                     UserDetailsScreen(
                         state = state,
+                        navigateBack = { navController.popBackStack() },
                         loadUserDetails = { viewModel.getUserDetails(route.login) }
                     )
                 }

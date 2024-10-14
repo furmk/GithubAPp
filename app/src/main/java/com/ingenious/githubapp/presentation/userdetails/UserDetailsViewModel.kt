@@ -3,7 +3,7 @@ package com.ingenious.githubapp.presentation.userdetails
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ingenious.githubapp.domain.usecase.GetUserDetailsUseCase
-import com.ingenious.githubapp.presentation.model.UserDetailsState
+import com.ingenious.githubapp.presentation.userdetails.model.UserDetailsState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -26,6 +26,10 @@ class UserDetailsViewModel @Inject constructor(
                     .onSuccess { userDetails ->
                         _uiState.update {
                             UserDetailsState.Loaded(userDetails)
+                        }
+                    }.onFailure {
+                        _uiState.update {
+                            UserDetailsState.Error
                         }
                     }
             }

@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,25 +16,44 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.paging.LoadState
+import androidx.paging.PagingData
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.ingenious.githubapp.domain.model.UserEntity
-import com.ingenious.githubapp.presentation.model.UserListState
+import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun UserListScreen(
-    state: UserListState,
+    state: StateFlow<PagingData<UserEntity>>,
     onUserClicked: (String) -> Unit,
 ) {
     val listState = rememberLazyListState()
+    val pagedItems = state.collectAsLazyPagingItems()
 
     LazyColumn(
         state = listState,
         modifier = Modifier.fillMaxSize()
     ) {
-        items(state.usersList) { user ->
+        items(pagedItems.itemCount) { index ->
+            val user = requireNotNull(pagedItems[index])
             UserListItem(
                 user = user,
                 onClick = { onUserClicked.invoke(user.login) }
             )
+        }
+        when {
+            pagedItems.loadState.refresh is LoadState.Loading -> {
+                item { CircularProgressIndicator() }
+            }
+            pagedItems.loadState.append is LoadState.Loading -> {
+                item { CircularProgressIndicator() }
+            }
+            pagedItems.loadState.append is LoadState.Error -> {
+                val error = pagedItems.loadState.append as LoadState.Error
+                item {
+                    Text("Error: ${error.error.localizedMessage}")
+                }
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ interface GithubService {
     @GET("users")
     suspend fun getUsers(
         @Query("since") since: Int = 0,
-        @Query("per_page") perPage: Int = 50,
+        @Query("per_page") perPage: Int = 20,
     ): List<UserResponse>
 
     @GET("users/{login}")
